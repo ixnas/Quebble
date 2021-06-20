@@ -31,7 +31,10 @@ public class AuthenticatieController implements IAuthenticatieController
 	public void logIn(String gebruikersnaam, String wachtwoord)
 	{
 		ISpeler speler = spelerRepository.haalSpelerOp(gebruikersnaam);
-		speler.controleerWachtwoord(wachtwoord);
+		if (!speler.controleerWachtwoord(wachtwoord))
+		{
+			throw new FoutWachtwoordException();
+		}
 		iLoginBeheerder.login(speler);
 	}
 
@@ -51,6 +54,15 @@ public class AuthenticatieController implements IAuthenticatieController
 	public boolean isIngelogd()
 	{
 		return iLoginBeheerder.isIngelogd();
+	}
+
+
+	/**
+	 * @see IAuthenticatieController#haalGebruikersnaamOp()
+	 */
+	public String haalGebruikersnaamOp()
+	{
+		return iLoginBeheerder.haalGebruikersnaamOp();
 	}
 
 }

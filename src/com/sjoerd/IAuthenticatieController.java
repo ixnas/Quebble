@@ -10,4 +10,5 @@ public interface IAuthenticatieController {
 
 	public abstract boolean isIngelogd();
 
+	public abstract String haalGebruikersnaamOp();
 }

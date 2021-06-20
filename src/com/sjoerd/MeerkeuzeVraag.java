@@ -2,7 +2,8 @@ package com.sjoerd;
 
 import java.util.ArrayList;
 
-public class MeerkeuzeVraag extends Vraag {
+public class MeerkeuzeVraag extends Vraag
+{
 
 	private ArrayList<Antwoord> antwoorden;
 
@@ -21,13 +22,34 @@ public class MeerkeuzeVraag extends Vraag {
 		}
 	}
 
-	public boolean isCorrectBeantwoord() {
-		return false;
+	public boolean isCorrectBeantwoord()
+	{
+		if (!isBeantwoord())
+		{
+			return false;
+		}
+
+		int beginLetter = 'a';
+		int gekozenLetter = gegevenAntwoord.naam.charAt(0);
+
+		int gekozenAntwoordIndex = gekozenLetter - beginLetter;
+
+		return gekozenAntwoordIndex == juisteAntwoordIndex;
 	}
 
 	public void geefAntwoord(String antwoord)
 	{
-		if (antwoord == null || antwoord.equals(""))
+		if (antwoord == null || antwoord.equals("") || antwoord.length() != 1)
+		{
+			throw new OngeldigAntwoordException();
+		}
+
+		char invoerKarakter = Character.toLowerCase(antwoord.charAt(0));
+
+		int keuzeLetterBeginKleineLetter = 'a';
+		int keuzeLetterEindKleineLetter = keuzeLetterBeginKleineLetter + antwoorden.size() - 1;
+
+		if (invoerKarakter < keuzeLetterBeginKleineLetter || invoerKarakter > keuzeLetterEindKleineLetter)
 		{
 			throw new OngeldigAntwoordException();
 		}
@@ -36,8 +58,22 @@ public class MeerkeuzeVraag extends Vraag {
 		gegevenAntwoord.naam = antwoord;
 	}
 
-	public ArrayList<String> haalAntwoordOptiesOp() {
-		return null;
+	public ArrayList<String> haalAntwoordOptiesOp()
+	{
+		ArrayList<String> antwoordOpties = new ArrayList<>();
+		char keuzeLetter = 'A';
+
+		for (Antwoord antwoord : antwoorden)
+		{
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append(keuzeLetter);
+			stringBuilder.append(". ");
+			stringBuilder.append(antwoord.naam);
+			antwoordOpties.add(stringBuilder.toString());
+			keuzeLetter++;
+		}
+
+		return antwoordOpties;
 	}
 
 }

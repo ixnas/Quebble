@@ -24,6 +24,7 @@ public class SpelerRepository {
 		Speler speler = new Speler();
 		speler.stelGebruikersnaamIn("Sjoerd");
 		speler.stelWachtwoordIn("wachtwoord");
+		speler.waardeerSaldoOp(1000);
 
 		return speler;
 	}

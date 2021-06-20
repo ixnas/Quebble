@@ -119,6 +119,11 @@ public class QuizRepository
 
 		quizzes.add(quiz);
 
+		if (uitgezonderdeQuizzes.size() == 0)
+		{
+			return quiz;
+		}
+
 		for (IQuiz uitgezonderdeQuiz : uitgezonderdeQuizzes)
 		{
 			for (IQuiz interneQuiz : quizzes)

@@ -1,8 +1,11 @@
 package com.sjoerd;
 
+import javafx.scene.paint.Stop;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class Quiz implements IQuiz
 {
@@ -16,12 +19,15 @@ public class Quiz implements IQuiz
 
 	private Spelresultaat spelresultaat;
 
+	private Stopwatch stopwatch;
+
 	public Quiz()
 	{
 		kosten = 0;
 		vragen = new ArrayList<>();
 		spelStatistieken = new SpelStatistieken();
 		spelresultaat = new Spelresultaat(spelStatistieken);
+		stopwatch = new Stopwatch();
 	}
 
 	public void stelGespeeldeTijdIn(int tijdInSeconden)
@@ -55,7 +61,7 @@ public class Quiz implements IQuiz
 	 */
 	public boolean bevatZelfdeSetVragen(IQuiz quiz)
 	{
-		Quiz teVergelijkenQuiz = (Quiz)quiz;
+		Quiz teVergelijkenQuiz = (Quiz) quiz;
 		if (vragen.size() != teVergelijkenQuiz.vragen.size())
 		{
 			return false;
@@ -78,7 +84,7 @@ public class Quiz implements IQuiz
 	 */
 	public void startQuiz()
 	{
-		throw new NotImplementedException();
+		stopwatch.Start();
 	}
 
 
@@ -120,6 +126,11 @@ public class Quiz implements IQuiz
 		ArrayList<Character> letters = new ArrayList<>();
 		for (IVraag vraag : vragen)
 		{
+			if (!vraag.isCorrectBeantwoord())
+			{
+				continue;
+			}
+
 			char letter = vraag.haalLetterOp();
 			letters.add(letter);
 		}
@@ -133,7 +144,27 @@ public class Quiz implements IQuiz
 	 */
 	public void stopQuiz()
 	{
-		throw new NotImplementedException();
+		if (!alleVragenZijnBeantwoord() || woord == null)
+		{
+			throw new QuizNogNietAfgemaaktException();
+		}
+
+		Letter[] karaktersArray = (Letter[]) vragen
+				.stream()
+				.map(v -> new Letter(v.haalLetterOp()))
+				.toArray();
+
+		ArrayList<Letter> karakters = new ArrayList<>();
+		Collections.addAll(karakters, karaktersArray);
+
+		stopwatch.Stop();
+		spelStatistieken.woordLengte = woord.haalLengteOp();
+		spelStatistieken.gespeeldeTijdInSeconden = stopwatch.haalVerstrekenTijdInSecondenOp();
+		spelStatistieken.totaalAantalVragen = vragen.size();
+		spelStatistieken.aantalCorrecteAntwoorden = (int) vragen
+				.stream()
+				.filter(IVraag::isCorrectBeantwoord)
+				.count();
 	}
 
 
@@ -142,7 +173,24 @@ public class Quiz implements IQuiz
 	 */
 	public void legWoord(String woord)
 	{
-		this.woord = new Woord(woord);
+		Woord nieuwWoord = new Woord(woord);
+
+		ArrayList<Character> quizLetters = new ArrayList<>();
+
+		for (IVraag vraag : vragen)
+		{
+			if (vraag.isCorrectBeantwoord())
+			{
+				quizLetters.add((Character) vraag.haalLetterOp());
+			}
+		}
+
+		if (!nieuwWoord.isGeldigWoordGemaaktVan(quizLetters))
+		{
+			throw new OngeldigWoordException();
+		}
+
+		this.woord = nieuwWoord;
 	}
 
 

@@ -110,4 +110,26 @@ public class Speler implements ISpeler
 		saldo += creditbedrag;
 	}
 
+
+	/**
+	 * @see ISpeler#schrijfVanSaldoAf(int)
+	 */
+	public void schrijfVanSaldoAf(int creditbedrag)
+	{
+		if (saldo - creditbedrag < 0)
+		{
+			throw new OnvoldoendeSaldoException();
+		}
+
+		saldo -= creditbedrag;
+	}
+
+	/**
+	 * @see ISpeler#haalGebruikersnaamOp()
+	 */
+	public String haalGebruikersnaamOp()
+	{
+		return gebruikersnaam;
+	}
+
 }

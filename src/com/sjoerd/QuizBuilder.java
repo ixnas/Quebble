@@ -33,7 +33,7 @@ public class QuizBuilder
 
 	public QuizBuilder stelVraagNaamIn(String naam)
 	{
-		vraagNaam = vraagNaam;
+		vraagNaam = naam;
 		return this;
 	}
 
@@ -118,7 +118,10 @@ public class QuizBuilder
 		quiz.stelVragenIn(vragen);
 		quiz.stelKostenIn(kosten);
 		quiz.stelGespeeldeTijdIn(gespeeldeTijdInSeconden);
-		quiz.legWoord(gelegdWoord);
+		if (gelegdWoord != null)
+		{
+			quiz.legWoord(gelegdWoord);
+		}
 
 		return quiz;
 	}

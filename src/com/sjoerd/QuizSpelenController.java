@@ -34,6 +34,7 @@ public class QuizSpelenController implements IQuizSpelenController
 
 		ArrayList<IQuiz> alGespeeldeQuizzes = speler.haalAlGespeeldeQuizzesOp();
 		iQuiz = quizRepository.haalQuizOp(alGespeeldeQuizzes);
+		speler.schrijfVanSaldoAf(iQuiz.haalKostenOp());
 		speler.stelHuidigeQuizIn(iQuiz);
 		iQuiz.startQuiz();
 	}
@@ -46,6 +47,7 @@ public class QuizSpelenController implements IQuizSpelenController
 	{
 		ISpeler speler = iHuidigeLogin.haalSpelerOp();
 		iQuiz = quizRepository.haalQuizOp(new ArrayList<>());
+		speler.schrijfVanSaldoAf(iQuiz.haalKostenOp());
 		speler.stelHuidigeQuizIn(iQuiz);
 		iQuiz.startQuiz();
 	}
@@ -122,6 +124,15 @@ public class QuizSpelenController implements IQuizSpelenController
 	public int haalScoreOp()
 	{
 		return iQuiz.haalScoreOp();
+	}
+
+
+	/**
+	 * @see IQuizSpelenController#alleVragenZijnBeantwoord()
+	 */
+	public boolean alleVragenZijnBeantwoord()
+	{
+		return iQuiz.alleVragenZijnBeantwoord();
 	}
 
 }

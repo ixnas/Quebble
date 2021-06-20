@@ -54,6 +54,7 @@ public abstract class Vraag implements IVraag
 		{
 			throw new NullPointerException();
 		}
+
 		return naam;
 	}
 

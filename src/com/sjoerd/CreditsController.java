@@ -1,8 +1,11 @@
 package com.sjoerd;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.util.Map;
 
-public class CreditsController implements ICreditsController {
+public class CreditsController implements ICreditsController
+{
 
 	private CreditOpwaardeerOptiesRepository creditOpwaardeerOptiesRepository;
 
@@ -21,16 +24,18 @@ public class CreditsController implements ICreditsController {
 	/**
 	 * @see ICreditsController#haalAantallenEnPrijzenInCentenOp()
 	 */
-	public Map<Integer,Integer> haalAantallenEnPrijzenInCentenOp() {
-		return null;
+	public Map<Integer, Integer> haalAantallenEnPrijzenInCentenOp()
+	{
+		throw new NotImplementedException();
 	}
 
 
 	/**
 	 * @see ICreditsController#koopCredits(int)
 	 */
-	public void koopCredits(int aantal) {
-
+	public void koopCredits(int aantal)
+	{
+		throw new NotImplementedException();
 	}
 
 }

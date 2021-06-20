@@ -1,6 +1,7 @@
 package com.sjoerd;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class OpenVraag extends Vraag
 {
@@ -20,11 +21,27 @@ public class OpenVraag extends Vraag
 
 	public ArrayList<String> haalAntwoordOptiesOp()
 	{
-		return null;
+		return new ArrayList<>();
 	}
 
 	public boolean isCorrectBeantwoord()
 	{
+		if (!isBeantwoord())
+		{
+			return false;
+		}
+
+		for (Antwoord antwoord : antwoorden)
+		{
+			String antwoordInKleineLetters = antwoord.naam.toLowerCase();
+			String gegevenAntwoordInKleineLetters = gegevenAntwoord.naam.toLowerCase();
+
+			if (antwoordInKleineLetters.equals(gegevenAntwoordInKleineLetters))
+			{
+				return true;
+			}
+		}
+
 		return false;
 	}
 

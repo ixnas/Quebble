@@ -24,4 +24,6 @@ public interface IQuizSpelenController {
 
 	public abstract int haalScoreOp();
 
+	public abstract boolean alleVragenZijnBeantwoord();
+
 }

@@ -7,7 +7,14 @@ public class SimpeleScoreBerekeningStrategy extends ScoreBerekeningStrategy
 
 	public int haalScoreOp(SpelStatistieken spelStatistieken)
 	{
-		throw new NotImplementedException();
+		// Voorbeeld van een mogelijke scoreberekening
+		/*
+		return spelStatistieken.woordLengte *
+				(spelStatistieken.aantalCorrecteAntwoorden / spelStatistieken.totaalAantalVragen) -
+				spelStatistieken.gespeeldeTijdInSeconden;
+		 */
+
+		return spelStatistieken.aantalCorrecteAntwoorden;
 	}
 
 }

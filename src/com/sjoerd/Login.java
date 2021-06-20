@@ -54,4 +54,13 @@ public class Login implements IHuidigeLogin, ILoginBeheerder
 		return iSpeler != null;
 	}
 
+
+	/**
+	 * @see ILoginBeheerder#haalGebruikersnaamOp()
+	 */
+	public String haalGebruikersnaamOp()
+	{
+		return iSpeler.haalGebruikersnaamOp();
+	}
+
 }

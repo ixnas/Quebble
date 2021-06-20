@@ -20,4 +20,7 @@ public interface ISpeler {
 
 	public abstract void waardeerSaldoOp(int creditbedrag);
 
+	public abstract void schrijfVanSaldoAf(int creditbedrag);
+
+	public abstract String haalGebruikersnaamOp();
 }

@@ -10,4 +10,11 @@ public class SpelStatistieken {
 
 	public int gespeeldeTijdInSeconden;
 
+	public SpelStatistieken()
+	{
+		aantalCorrecteAntwoorden = 0;
+		totaalAantalVragen = 0;
+		woordLengte = 0;
+		gespeeldeTijdInSeconden = 0;
+	}
 }

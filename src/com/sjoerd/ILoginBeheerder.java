@@ -8,4 +8,6 @@ public interface ILoginBeheerder {
 
 	public abstract boolean isIngelogd();
 
+	public abstract String haalGebruikersnaamOp();
+
 }
