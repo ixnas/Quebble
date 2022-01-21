@@ -1,0 +1,76 @@
+\documentclass[a4paper, titlepage, headings=standardclasses, listof=totoc]{scrartcl}
+
+%\usepackage{plex-serif}
+\usepackage{csquotes}
+\usepackage[hidelinks]{hyperref}
+\usepackage[dutch]{babel}
+\usepackage[backend=biber, citestyle=apa, style=apa]{biblatex}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[shortlabels]{enumitem}
+\usepackage[section]{placeins}
+\usepackage{xltabular}
+\usepackage{fancyhdr}
+\usepackage{pdflscape}
+\usepackage{svg}
+\usepackage{caption}
+
+% Bibliography.
+\addbibresource{../Bibliografie.bib}
+
+% Package used for adding header titles.
+\let\origmaketitle\maketitle
+\usepackage{titling}
+\let\maketitle\origmaketitle
+
+% Flips margins for two-sided prints.
+\let\tmp\oddsidemargin
+\let\oddsidemargin\evensidemargin
+\let\evensidemargin\tmp
+\reversemarginpar
+
+% Chapter and title header.
+\pagestyle{fancy}
+\fancyhead[L]{\textsl{\leftmark}}
+\fancyhead[R]{\textsc{\thetitle}}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Complementary colors to the red color from the HAN logo.
+\definecolor{hanA}{HTML}{D91E57}
+\definecolor{hanB}{HTML}{8C062E}
+\definecolor{hanC}{HTML}{D9CD34}
+\definecolor{hanD}{HTML}{09A9D9}
+\definecolor{hanE}{HTML}{0D6F8C}
+
+% Coloring elements.
+%\let\HeadRule\headrule
+%\let\FootRule\footrule
+%\renewcommand\headrule{\color{hanE}\HeadRule}
+%\renewcommand\footrule{\textcolor{hanE}\FootRule}
+%\addtokomafont{section}{\color{hanA}}
+%\addtokomafont{subsection}{\color{hanA}}
+%\addtokomafont{subsubsection}{\color{hanA}}
+%\let\oldtextbf\textbf
+%\renewcommand{\textbf}[1]{\textcolor{hanB}{\oldtextbf{#1}}}
+
+% Fonts.
+%\renewcommand{\rmdefault}{bch}
+\renewcommand{\rmdefault}{bch}
+\renewcommand{\sfdefault}{qag}
+
+% Custom commands and environments.
+% Itemize without vertical spacing.
+\newenvironment{smallitemize}{\begin{itemize}[nosep,after=\strut]}{\end{itemize}}
+% Enumerate without vertical spacing.
+\newenvironment{smallenumerate}{\begin{enumerate}[nosep,after=\strut]}{\end{enumerate}}
+% Minipage made to look like a floating figure.
+\newenvironment{mpfigure}{\vspace{\floatsep}\noindent\begin{minipage}{\linewidth}\captionsetup{type=figure}}{\end{minipage}\vspace{1.1\floatsep}}
+\newcommand{\comment}[1]{}
+
+% Custom title page entries.
+\def\Version#1{\def\version{#1}}
+\def\Subtitle#1{\def\csubtitle{#1}}
+\def\Teacher#1{\def\teacher{#1}}
+
+% Other settings.
+\setlength{\LTpre}{0pt}
